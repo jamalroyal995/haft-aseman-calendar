@@ -68,3 +68,36 @@ export const isSameJalaliDay = (date1: Date, date2: Date): boolean => {
     getJalaliDay(date1) === getJalaliDay(date2)
   );
 };
+
+// Check if a date is a holiday (Fridays or specific national holidays)
+export const isHoliday = (date: Date): boolean => {
+  // In Iranian calendar, Friday is the weekend holiday
+  const dayOfWeek = jMoment(date).day();
+  if (dayOfWeek === 6) { // Friday is day 6 in jalali-moment
+    return true;
+  }
+  
+  // Official holidays in the Iranian calendar
+  const month = getJalaliMonth(date);
+  const day = getJalaliDay(date);
+  
+  // This is a simplified list of some Iranian holidays
+  // You may want to expand this with a more complete list
+  const officialHolidays = [
+    // Norouz holidays (1/1 to 1/4)
+    { month: 1, day: 1 },  // New Year
+    { month: 1, day: 2 },
+    { month: 1, day: 3 },
+    { month: 1, day: 4 },
+    { month: 1, day: 12 }, // Islamic Republic Day
+    { month: 1, day: 13 }, // Nature Day
+    { month: 3, day: 14 }, // Passing of Imam Khomeini
+    { month: 3, day: 15 }, // Khordad uprising
+    { month: 11, day: 22 }, // Victory of the Islamic Revolution
+    { month: 12, day: 29 }, // Oil Industry Nationalization
+  ];
+  
+  return officialHolidays.some(holiday => 
+    holiday.month === month && holiday.day === day
+  );
+};

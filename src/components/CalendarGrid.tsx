@@ -5,7 +5,8 @@ import {
   getJalaliMonth, 
   getJalaliYear, 
   getMonthStartDayOfWeek,
-  isSameJalaliDay
+  isSameJalaliDay,
+  isHoliday
 } from '@/lib/jalali';
 import { cn } from '@/lib/utils';
 
@@ -57,7 +58,14 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
       {/* Weekday headers */}
       <div className="grid grid-cols-7 text-center py-2 border-b">
         {weekDays.map((day, index) => (
-          <div key={index} className="text-sm font-medium text-gray-500">
+          <div 
+            key={index} 
+            className={cn(
+              "text-sm font-medium",
+              // Friday (last day of week) is always a holiday
+              index === 6 ? "text-red-600" : "text-gray-500"
+            )}
+          >
             {day}
           </div>
         ))}
@@ -74,6 +82,7 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
           const isSelected = selectedDate && isSameJalaliDay(day, selectedDate);
           const dayHasReminder = hasReminder(day);
           const dayIsToday = isToday(day);
+          const dayIsHoliday = isHoliday(day);
           
           return (
             <div
@@ -87,7 +96,9 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
             >
               <span className={cn(
                 "w-7 h-7 flex items-center justify-center rounded-full text-sm",
-                isSelected ? "font-bold" : dayIsToday ? "font-bold" : ""
+                isSelected ? "font-bold" : dayIsToday ? "font-bold" : "",
+                // Apply red color to holiday dates if not selected
+                !isSelected && dayIsHoliday ? "text-red-600" : ""
               )}>
                 {dayOfMonth}
               </span>
