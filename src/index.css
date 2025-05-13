@@ -73,7 +73,7 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground transition-colors duration-300;
     direction: rtl;
     font-family: 'Vazirmatn', 'Tahoma', sans-serif;
   }
@@ -93,6 +93,23 @@
     font-style: normal;
     font-display: swap;
   }
+
+  /* Additional fonts */
+  @font-face {
+    font-family: 'Samim';
+    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/samim-font@v4.0.5/dist/Samim.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Sahel';
+    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/sahel-font@v3.4.0/dist/Sahel.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
 }
 
 .rtl {
@@ -102,3 +119,4 @@
 .ltr {
   direction: ltr;
 }
+

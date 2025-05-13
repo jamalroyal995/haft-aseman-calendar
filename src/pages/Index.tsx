@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import CalendarHeader from '@/components/CalendarHeader';
 import CalendarGrid from '@/components/CalendarGrid';
 import ReminderForm from '@/components/ReminderForm';
@@ -104,9 +104,7 @@ const Index = () => {
   };
   
   return (
-    <div className="container mx-auto max-w-4xl px-4 py-8">
-      <h1 className="text-3xl font-bold text-center mb-8">تقویم شمسی</h1>
-      
+    <div>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2">
           <CalendarHeader
